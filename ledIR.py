@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 # Configuración
-LED_PIN = 24
+LED_PIN = 25
 LIRC_DEV = "/dev/lirc0"
 PULSE_MASK = 0x01000000
 MAX_BYTES = 8

@@ -13,13 +13,14 @@ MAX_BYTES = 8
 # Inicializar GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN, GPIO.OUT)
-GPIO.output(LED_PIN, GPIO.LOW)
+GPIO.output(LED_PIN, GPIO.LOW)  # Comienza apagado
 
 print("Escuchando señales IR...")
 
 # Tiempo de espera mínimo entre pulsos válidos (antirrebote)
 tiempo_entre_pulsos = 0.5  # segundos
 ultimo_pulso = 0
+led_encendido = False
 
 try:
     with open(LIRC_DEV, "rb") as lirc:
@@ -40,12 +41,15 @@ try:
             ahora = time.time()
             if is_pulse and ahora - ultimo_pulso > tiempo_entre_pulsos:
                 print(f"pulse {duration} µs")
-                GPIO.output(LED_PIN, not GPIO.input(LED_PIN))
-                print("LED ENCENDIDO" if GPIO.input(LED_PIN) else "LED APAGADO")
+
+                if not led_encendido:
+                    GPIO.output(LED_PIN, GPIO.HIGH)
+                    print("LED ENCENDIDO")
+                    led_encendido = True
+
                 ultimo_pulso = ahora
 
 except KeyboardInterrupt:
     print("\nPrograma interrumpido por el usuario.")
 finally:
     GPIO.cleanup()
-

@@ -31,9 +31,6 @@ Fue desarrollado como parte del evento **HackUPC 2025** y busca servir como base
 ## 🛠️ Requisitos
 
 - Python 3.8 o superior.
-- No requiere librerías externas para la simulación básica.
-- (Opcional) `pygame` o `matplotlib` si deseas agregar visualización.
-
 ---
 
 ## 🧠 Estrategia del Bot
